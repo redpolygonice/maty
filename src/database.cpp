@@ -25,13 +25,13 @@ bool Database::open()
 
 	// Open or create database
 	QString dbFile = dbDir.absolutePath() + QDir::separator() + kDbName;
-	_db = QSqlDatabase::addDatabase("QSQLITE");
-	_db.setHostName(kDbHostName);
-	_db.setDatabaseName(dbFile);
+	db_ = QSqlDatabase::addDatabase("QSQLITE");
+	db_.setHostName(kDbHostName);
+	db_.setDatabaseName(dbFile);
 
-	if (_db.open())
+	if (db_.open())
 	{
-		if (_db.tables().empty())
+		if (db_.tables().empty())
 			return createTables();
 	}
 	else
@@ -42,7 +42,7 @@ bool Database::open()
 
 bool Database::createTables()
 {
-	QSqlQuery query(_db);
+	QSqlQuery query(db_);
 	if (!query.exec("CREATE TABLE " + QString(kHistoryName) + " ("
 					"id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					"cid INTEGER KEY NOT NULL, "
@@ -71,7 +71,7 @@ bool Database::createTables()
 
 void Database::close()
 {
-	_db.close();
+	db_.close();
 }
 
 bool Database::appendHistory(const QVariantList &list)
@@ -79,7 +79,7 @@ bool Database::appendHistory(const QVariantList &list)
 	if (list[0].toInt() <= 0)
 		return false;
 
-	QSqlQuery query(_db);
+	QSqlQuery query(db_);
 	query.prepare("INSERT INTO " + QString(kHistoryName) + " (cid, sender, text, ts)"
 					" VALUES (:cid, :sender, :text, :ts)");
 
@@ -99,7 +99,7 @@ bool Database::appendHistory(const QVariantList &list)
 
 bool Database::removeHistory(int id)
 {
-	QSqlQuery query(_db);
+	QSqlQuery query(db_);
 	query.prepare("DELETE FROM " + QString(kHistoryName) + " WHERE id = :id");
 	query.bindValue(":id", id);
 
@@ -114,7 +114,7 @@ bool Database::removeHistory(int id)
 
 bool Database::modifyHistory(int id, const QString &text)
 {
-	QSqlQuery query(_db);
+	QSqlQuery query(db_);
 	query.prepare("UPDATE " + QString(kHistoryName) + " SET text = :text WHERE id = :id");
 	query.bindValue(":id", id);
 	query.bindValue(":text", text);
@@ -130,7 +130,7 @@ bool Database::modifyHistory(int id, const QString &text)
 
 bool Database::clearHistory(int cid)
 {
-	QSqlQuery query(_db);
+	QSqlQuery query(db_);
 	query.prepare("DELETE FROM " + QString(kHistoryName) + " WHERE cid = :cid");
 	query.bindValue(":cid", cid);
 
@@ -145,7 +145,7 @@ bool Database::clearHistory(int cid)
 
 bool Database::appendContact(const QVariantList &list)
 {
-	QSqlQuery query(_db);
+	QSqlQuery query(db_);
 	query.prepare("INSERT INTO " + QString(kContactsName) + " (name, imgname, phone, ts)"
 												" VALUES (:name, :imgname, :phone, :ts)");
 
@@ -165,7 +165,7 @@ bool Database::appendContact(const QVariantList &list)
 
 bool Database::modifyContact(int id, const QVariantList &list)
 {
-	QSqlQuery query(_db);
+	QSqlQuery query(db_);
 	query.prepare("UPDATE " + QString(kContactsName) + " SET name = :name, imgname = :imgname, phone = :phone"
 														" WHERE id = :id");
 
@@ -185,7 +185,7 @@ bool Database::modifyContact(int id, const QVariantList &list)
 
 bool Database::removeContact(int id)
 {
-	QSqlQuery query(_db);
+	QSqlQuery query(db_);
 	query.prepare("DELETE FROM " + QString(kContactsName) + " WHERE id = :id");
 	query.bindValue(":id", id);
 
@@ -202,7 +202,7 @@ QVariantList Database::contactCard(int id)
 {
 	QVariantList result;
 
-	QSqlQuery query(_db);
+	QSqlQuery query(db_);
 	query.prepare("SELECT name, imgname, phone FROM " +
 				  QString(kContactsName) + " WHERE id = " + QString::number(id));
 

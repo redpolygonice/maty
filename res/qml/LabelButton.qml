@@ -1,6 +1,6 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 Button {
 	id: control
@@ -10,15 +10,18 @@ Button {
 	Layout.preferredWidth: 70
 	Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
+	property color backcolor: "transparent"
+	property color backcolorhover: "#eeeeee"
+
 	background: Rectangle {
 		color: {
 			if (mouseArea.containsMouse)
 			{
 				//opacity = 0.4
-				return "#eeeeee"
+				return backcolorhover
 			}
 			else
-				return "transparent"
+				return backcolor
 		}
 		radius: 7
 	}

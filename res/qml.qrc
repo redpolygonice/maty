@@ -11,5 +11,6 @@
         <file>qml/CardDlg.qml</file>
         <file>qml/common.js</file>
         <file>qml/LabelButton.qml</file>
+        <file>qml/ConfirmDlg.qml</file>
     </qresource>
 </RCC>

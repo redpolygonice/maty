@@ -25,9 +25,9 @@ class Database : public QObject
 	Q_OBJECT
 
 private:
-	QSqlDatabase _db;
-	HistoryModel _historyModel;
-	ContactsModel _contactsModel;
+	QSqlDatabase db_;
+	HistoryModel historyModel_;
+	ContactsModel contactsModel_;
 
 private:
 	Database();
@@ -54,9 +54,9 @@ public:
 public:
 	bool open();
 	void close();
-	bool isOpen() const { return _db.isOpen(); }
-	HistoryModel *historyModel() { return &_historyModel; }
-	ContactsModel *contactsModel() { return &_contactsModel; }
+	bool isOpen() const { return db_.isOpen(); }
+	HistoryModel *historyModel() { return &historyModel_; }
+	ContactsModel *contactsModel() { return &contactsModel_; }
 
 private:
 	bool createTables();

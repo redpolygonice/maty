@@ -1,8 +1,7 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Dialogs 1.3
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
 import "common.js" as Common
 
 Rectangle {
@@ -116,7 +115,7 @@ Rectangle {
 							cursorShape: Qt.IBeamCursor
 							acceptedButtons: Qt.RightButton
 
-							onClicked: {
+							onClicked: (mouse) => {
 								listView.currentIndex = index
 								currentId = id
 
@@ -277,15 +276,15 @@ Rectangle {
 		}
 	}
 
-	MessageDialog {
+	ConfirmDlg {
 		id: removeDlg
-		text: "Remove current history record ?"
-		icon: StandardIcon.Question
-		standardButtons: StandardButton.Yes | StandardButton.No
+		titleText: "Removing record"
+		messageText: "Remove current history record ?"
 
-		onYes: {
+		onOkClicked: {
 			database.removeHistory(currentId)
 			historyModel.update(contactsView.currentId)
 		}
+
 	}
 }

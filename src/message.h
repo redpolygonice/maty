@@ -3,10 +3,14 @@
 
 #include <QObject>
 #include <QString>
+#include <QStringList>
 
 class Message : public QObject
 {
 	Q_OBJECT
+
+private:
+	QStringList data_;
 
 public:
 	explicit Message(QObject *parent = nullptr);

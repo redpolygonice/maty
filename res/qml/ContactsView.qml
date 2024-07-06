@@ -1,8 +1,7 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Dialogs 1.3
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
 import "common.js" as Common
 
 Rectangle {
@@ -67,14 +66,14 @@ Rectangle {
 				hoverEnabled: true
 				cursorShape: Qt.PointingHandCursor
 
-				onClicked: {
+				onClicked: (mouse) => {
 					currentId = id
 					listView.currentIndex = index
-					mouse.accepted = false
+					 mouse.accepted = false
 
 					if (mouse.button === Qt.RightButton)
 					{
-						contextMenu.popup()
+					contextMenu.popup()
 					}
 				}
 			}
@@ -158,7 +157,7 @@ Rectangle {
 			text: "Remove"
 			onTriggered: {
 				removeDlg.sender = ContactsView.ConfirmDlgSender.RemoveContact
-				removeDlg.text = "Remove current contact ?"
+				removeDlg.messageText = "Remove current contact ?"
 				removeDlg.open()
 			}
 		}
@@ -167,7 +166,7 @@ Rectangle {
 			text: "Clear history"
 			onTriggered: {
 				removeDlg.sender = ContactsView.ConfirmDlgSender.ClearHistory
-				removeDlg.text = "Clear contact history ?"
+				removeDlg.messageText = "Clear contact history ?"
 				removeDlg.open()
 			}
 		}
@@ -206,14 +205,12 @@ Rectangle {
 		}
 	}
 
-	MessageDialog {
+	ConfirmDlg {
 		id: removeDlg
-		icon: StandardIcon.Question
-		standardButtons: StandardButton.Yes | StandardButton.No
 
 		property int sender: ContactsView.ConfirmDlgSender.None
 
-		onYes: {
+		onOkClicked: {
 			if (sender === ContactsView.ConfirmDlgSender.RemoveContact)
 			{
 				removeContact()
@@ -229,7 +226,7 @@ Rectangle {
 	{
 		database.removeContact(currentId)
 		database.clearHistory(currentId)
-		contactsModel.update(currentId)
+		contactsModel.update()
 		historyModel.update(0)
 		listView.currentIndex = -1
 	}

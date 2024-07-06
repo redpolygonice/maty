@@ -1,5 +1,5 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQuick.Controls
 import "common.js" as Common
 
 Rectangle {
@@ -18,6 +18,7 @@ Rectangle {
 		anchors.fill: parent
 		anchors.margins: 5
 		anchors.verticalCenter: parent.verticalCenter
+		color: "#000000"
 		selectionColor: "#aaaaaa"
 		selectByKeyboard: true
 		selectByMouse: true
@@ -27,7 +28,7 @@ Rectangle {
 		font.pointSize: 13
 		placeholderText: "Enter text .."
 
-		Keys.onPressed: {
+		Keys.onPressed: (event) => {
 			if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return)
 			{
 				if (textView.text.trim().length === 0)

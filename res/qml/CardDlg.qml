@@ -1,8 +1,8 @@
-import QtQuick 2.0
-import QtQuick.Dialogs 1.3
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15
-import QtQuick.Window 2.15
+import QtQuick
+import QtQuick.Dialogs
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Window
 import "common.js" as Common
 
 Dialog {
@@ -72,6 +72,10 @@ Dialog {
 				Layout.fillWidth: true
 				font.pointSize: Common.fontPointSize
 				implicitHeight: 30
+				color: "black"
+				background: Rectangle {
+					color: Common.backColor1
+				}
 			}
 
 			Text {
@@ -86,6 +90,10 @@ Dialog {
 				Layout.fillWidth: true
 				font.pointSize: Common.fontPointSize
 				implicitHeight: 30
+				color: "black"
+				background: Rectangle {
+					color: Common.backColor1
+				}
 			}
 
 			Text {
@@ -100,6 +108,10 @@ Dialog {
 				Layout.fillWidth: true
 				font.pointSize: Common.fontPointSize
 				implicitHeight: 30
+				color: "black"
+				background: Rectangle {
+					color: Common.backColor1
+				}
 			}
 
 			Rectangle {
