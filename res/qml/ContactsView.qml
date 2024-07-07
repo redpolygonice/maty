@@ -96,7 +96,7 @@ Rectangle {
 		highlightMoveVelocity: -1
 
 		ScrollBar.vertical: ScrollBar {
-			visible: true
+			policy: ScrollBar.AsNeeded
 		}
 
 		header: ToolBar {

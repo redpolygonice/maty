@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import QtQuick.Dialogs
 import "common.js" as Common
@@ -101,13 +101,17 @@ Rectangle {
 							anchors.fill: parent
 							anchors.margins: 5
 							anchors.verticalCenter: parent.verticalCenter
+							verticalAlignment: TextEdit.AlignVCenter
 							text: message
 							font.pointSize: 13
-							color: "#4D4D4D"
 							wrapMode: Text.Wrap
+							color: "#4D4D4D"
 							selectionColor: "#aaaaaa"
 							selectByKeyboard: true
 							selectByMouse: true
+							background: Rectangle {
+								color: "transparent"
+							}
 						}
 
 						MouseArea {
@@ -195,7 +199,7 @@ Rectangle {
 			delegate: delegate
 
 			ScrollBar.vertical: ScrollBar {
-				visible: true
+				policy: ScrollBar.AsNeeded
 			}
 
 			onCountChanged: {

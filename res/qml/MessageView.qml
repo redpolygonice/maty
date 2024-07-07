@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Basic
 import "common.js" as Common
 
 Rectangle {
@@ -27,6 +27,9 @@ Rectangle {
 		wrapMode: TextEdit.Wrap
 		font.pointSize: 13
 		placeholderText: "Enter text .."
+		background: Rectangle {
+			color: "transparent"
+		}
 
 		Keys.onPressed: (event) => {
 			if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return)
