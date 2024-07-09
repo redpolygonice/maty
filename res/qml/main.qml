@@ -5,67 +5,97 @@ import QtQuick.Window
 import "common.js" as Common
 
 ApplicationWindow {
-    id: mainWindow
-    width: 800
-    height: 600
-    visible: true
-    title: "Maty"
+	id: mainWindow
+	width: 800
+	height: 600
+	visible: false
+	title: "Maty"
 
-    signal newText(int id, string text)
+	property variant regForm
+	property variant loginForm
 
-    Component.onCompleted: {
-        x = Screen.width / 2 - width / 2
-        y = Screen.height / 2 - height / 2
-        historyModel.update(-1)
-        contactsModel.update()
-    }
+	signal newText(int id, string text)
 
-    ActionsMenu {
-        id: actionsMenu
-    }
+	Component.onCompleted: {
+		if (!settings.params["autologin"])
+			login()
+		else
+			visible = true
 
-    CardDlg {
-        id: cardDlg
-    }
+		x = Screen.width / 2 - mainWindow.width / 2
+		y = Screen.height / 2 - mainWindow.height / 2
+		historyModel.update(-1)
+		contactsModel.update()
+	}
 
-    SplitView {
-        id: splitView
-        anchors.fill: parent
-        orientation: Qt.Horizontal
+	Component {
+		id: regComponent
+		RegForm { }
+	}
 
-        handle: Rectangle {
-            implicitWidth: 3
-            color: Common.backColor1
-        }
+	Component {
+		id: loginComponent
+		LoginForm { }
+	}
 
-        ContactsView {
-            id: contactsView
-            SplitView.fillWidth: false
-            SplitView.fillHeight: true
-            SplitView.minimumWidth: 200
-        }
+	ActionsMenu {
+		id: actionsMenu
+	}
 
-        Rectangle {
-            id: contentRect
-            SplitView.fillWidth: true
-            SplitView.fillHeight: true
-            SplitView.minimumWidth: 200
+	CardDlg {
+		id: cardDlg
+	}
 
-            Column {
-                anchors.fill: parent
+	SplitView {
+		id: splitView
+		anchors.fill: parent
+		orientation: Qt.Horizontal
 
-                HistoryView {
-                    id: historyView
-                    width: mainWindow.contentItem.width - contactsView.width
-                    height: contactsView.currentIndex === -1 ? mainWindow.contentItem.height :
-                                                               mainWindow.contentItem.height - messageView.height
-                }
+		handle: Rectangle {
+			implicitWidth: 3
+			color: Common.backColor1
+		}
 
-                MessageView {
-                    id: messageView
-                    width: mainWindow.contentItem.width - contactsView.width
-                }
-            }
-        }
-    }
+		ContactsView {
+			id: contactsView
+			SplitView.fillWidth: false
+			SplitView.fillHeight: true
+			SplitView.minimumWidth: 200
+		}
+
+		Rectangle {
+			id: contentRect
+			SplitView.fillWidth: true
+			SplitView.fillHeight: true
+			SplitView.minimumWidth: 200
+
+			Column {
+				anchors.fill: parent
+
+				HistoryView {
+					id: historyView
+					width: mainWindow.contentItem.width - contactsView.width
+					height: contactsView.currentIndex === -1 ? mainWindow.contentItem.height :
+															   mainWindow.contentItem.height - messageView.height
+				}
+
+				MessageView {
+					id: messageView
+					width: mainWindow.contentItem.width - contactsView.width
+				}
+			}
+		}
+	}
+
+	function register()
+	{
+		regForm = regComponent.createObject(mainWindow)
+		regForm.show()
+	}
+
+	function login()
+	{
+		loginForm = loginComponent.createObject(mainWindow)
+		loginForm.show()
+	}
 }

@@ -42,7 +42,7 @@ Rectangle {
 								imgname === null || imgname === undefined)
 							return "qrc:///img/user.png"
 						else
-							return "file:///" + helper.imagePath() + "/" + imgname
+							return "file:///" + settings.imagePath() + "/" + imgname
 					}
 				}
 

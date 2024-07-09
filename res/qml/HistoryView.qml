@@ -67,7 +67,7 @@ Rectangle {
 								imageFile === null || imageFile === undefined)
 							return "qrc:///img/user.png"
 						else
-							return "file:///" + helper.imagePath() + "/" + imageFile
+							return "file:///" + settings.imagePath() + "/" + imageFile
 					}
 				}
 
@@ -105,7 +105,7 @@ Rectangle {
 							text: message
 							font.pointSize: 13
 							wrapMode: Text.Wrap
-							color: "#4D4D4D"
+							color: Common.textColor
 							selectionColor: "#aaaaaa"
 							selectByKeyboard: true
 							selectByMouse: true
@@ -168,7 +168,7 @@ Rectangle {
 								imgname === null || imgname === undefined)
 							return ""
 						else
-							return "file:///" + helper.imagePath() + "/" + imgname
+							return "file:///" + settings.imagePath() + "/" + imgname
 					}
 				}
 
@@ -257,7 +257,7 @@ Rectangle {
 				text: menuItem.text
 				font.pointSize: 12
 				opacity: enabled ? 1.0 : 0.3
-				color: "#4D4D4D"
+				color: Common.textColor
 				horizontalAlignment: Text.AlignLeft
 				verticalAlignment: Text.AlignVCenter
 				elide: Text.ElideRight
