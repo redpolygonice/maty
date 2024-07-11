@@ -48,9 +48,7 @@ Dialog {
 
 		Label {
 			text: dialog.title
-			font.pointSize: 13
-			font.bold: true
-			color: "black"
+			font.pointSize: 14
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 			Layout.topMargin: 10

@@ -12,7 +12,5 @@
         <file>qml/common.js</file>
         <file>qml/LabelButton.qml</file>
         <file>qml/ConfirmDlg.qml</file>
-        <file>qml/LoginForm.qml</file>
-        <file>qml/RegForm.qml</file>
     </qresource>
 </RCC>
